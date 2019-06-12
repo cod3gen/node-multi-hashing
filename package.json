@@ -1,14 +1,14 @@
 {
     "name": "multi-hashing",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "main": "multihashing",
     "author": {
-        "name": "Matthew Little",
-        "email": "zone117x@gmail.com"
+        "name": "cod3gen",
+        "email": "cod3gen@gmail.com"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/zone117x/node-multi-hashing.git"
+        "url": "https://github.com/cod3gen/node-multi-hashing.git"
     },
     "dependencies" : {
         "bindings" : "*"
@@ -38,6 +38,6 @@
   "readmeFilename": "README.md",
   "description": "node-multi-hashing",
   "bugs": {
-    "url": "https://github.com/UNOMP/node-multi-hashing/issues"
+    "url": "https://github.com/cod3gen/node-multi-hashing/issues"
   }
 }
