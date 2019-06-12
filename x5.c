@@ -10,7 +10,7 @@
 #include "sha3/sph_keccak.h"
 #include "sha3/sph_skein.h"
 
-void x5_hash(const char* input, char* output)
+void x5_hash(const char* input, char* output, uint32_t len)
 {
     sph_blake512_context     ctx_blake;
     sph_groestl512_context   ctx_groestl;
@@ -22,7 +22,7 @@ void x5_hash(const char* input, char* output)
 
     // BLAKE
     sph_blake512_init(&ctx_blake);
-    sph_blake512(&ctx_blake, input, 80);
+    sph_blake512(&ctx_blake, input, len);
     sph_blake512_close(&ctx_blake, (void*) hash);
     // GROESTL
     sph_groestl512_init(&ctx_groestl);
