@@ -152,12 +152,12 @@ using namespace v8;
  DECLARE_CALLBACK(x11, x11_hash, 32);
  DECLARE_CALLBACK(x13, x13_hash, 32);
  DECLARE_CALLBACK(x15, x15_hash, 32);
- //DECLARE_CALLBACK_WO_IL(yescrypt, yescrypt_hash, 32);
- //DECLARE_CALLBACK(dcrypt, dcrypt_hash, 32);
- //DECLARE_CALLBACK(s3, s3_hash, 32);
- //DECLARE_CALLBACK(x14, x14_hash, 32);
- //DECLARE_CALLBACK(jh, jh_hash, 32);
- //DECLARE_CALLBACK(x5, x5_hash, 32);
+ DECLARE_CALLBACK_WO_IL(yescrypt, yescrypt_hash, 32);
+ DECLARE_CALLBACK(dcrypt, dcrypt_hash, 32);
+ DECLARE_CALLBACK(s3, s3_hash, 32);
+ DECLARE_CALLBACK(x14, x14_hash, 32);
+ DECLARE_CALLBACK(jh, jh_hash_i, 32);
+ DECLARE_CALLBACK(x5, x5_hash, 32);
  
  
  
@@ -412,12 +412,12 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "x13", x13);
     NODE_SET_METHOD(exports, "x15", x15);
     NODE_SET_METHOD(exports, "neoscrypt", neoscrypt);
-	//NODE_SET_METHOD(exports, "dcrypt", dcrypt);
-	//NODE_SET_METHOD(exports, "yescrypt", yescrypt);
-	//NODE_SET_METHOD(exports, "s3", s3);
-	//NODE_SET_METHOD(exports, "x14", x14);
-	//NODE_SET_METHOD(exports, "jh", jh);
-	//NODE_SET_METHOD(exports, "x5", x5);
+	NODE_SET_METHOD(exports, "dcrypt", dcrypt);
+	NODE_SET_METHOD(exports, "yescrypt", yescrypt);
+	NODE_SET_METHOD(exports, "s3", s3);
+	NODE_SET_METHOD(exports, "x14", x14);
+	NODE_SET_METHOD(exports, "jh", jh);
+	NODE_SET_METHOD(exports, "x5", x5);
 }
 
 NODE_MODULE(multihashing, init)
