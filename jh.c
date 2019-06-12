@@ -7,7 +7,7 @@
 #include "sha3/sph_jh.h"
 
 
-void jh_hash(const char* input, char* output, uint32_t len) {
+void jh_hash_i(const char* input, char* output, uint32_t len) {
 
     sph_jh256_context ctx_jh;
     sph_jh256_init(&ctx_jh);
