@@ -41,5 +41,5 @@ void x5_hash(const char* input, char* output)
     sph_skein512(&ctx_skein, (const void*) hash, 64);
     sph_skein512_close(&ctx_skein, (void*) hash);
 
-    memcpy(state, hash, 32);
+    memcpy(output, hash, 32);
 }
