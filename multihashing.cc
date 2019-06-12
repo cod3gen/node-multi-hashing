@@ -20,33 +20,21 @@ extern "C" {
     #include "qubit.h"
     #include "scryptjane.h"
     #include "scryptn.h"
-    #include "yescrypt/yescrypt.h"
-    #include "yescrypt/sha256_Y.h"
-    #include "neoscrypt.h"
     #include "sha1.h"
     #include "sha256d.h"
     #include "shavite3.h"
     #include "skein.h"
     #include "x11.h"
-    #include "groestl.h"
-    #include "blake.h"
-    #include "fugue.h"
-    #include "qubit.h"
-    #include "s3.h"
-    #include "hefty1.h"
-    #include "shavite3.h"
-    #include "cryptonight.h"
     #include "x13.h"
-    #include "x14.h"
-    #include "nist5.h"
-    #include "sha1.h"
     #include "x15.h"
-    #include "fresh.h"
     #include "neoscrypt.h"
-    #include "dcrypt.h"
-    #include "jh.h"
-    #include "x5.h"
-    #include "c11.h"
+	#include "yescrypt/yescrypt.h"
+	#include "yescrypt/sha256_Y.h"
+	#include "dcrypt.h"
+	#include "s3.h"
+	#include "x14.h"
+	#include "x5.h"
+	#include "jh.h"
 }
 
 #include "boolberry.h"
@@ -102,7 +90,7 @@ using namespace v8;
 
 #endif // NODE_MAJOR_VERSION
 
-#define DECLARE_CALLBACK_WITH_INPUT_LEN(name, hash, output_len) \
+#define DECLARE_CALLBACK(name, hash, output_len) \
     DECLARE_FUNC(name) { \
     DECLARE_SCOPE; \
  \
@@ -124,7 +112,7 @@ using namespace v8;
     SET_BUFFER_RETURN(output, output_len); \
 }
 
-#define DECLARE_CALLBACK_WITHOUT_INPUT_LEN(name, hash, output_len) \
+#define DECLARE_CALLBACK_WO_IL(name, hash, output_len) \
     DECLARE_FUNC(name) { \
     DECLARE_SCOPE; \
  \
@@ -144,34 +132,35 @@ using namespace v8;
     SET_BUFFER_RETURN(output, output_len); \
 }
 
-DECLARE_CALLBACK_WITHOUT_INPUT_LEN(bcrypt, bcrypt_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(blake, blake_hash, 32);
-DECLARE_CALLBACK_WITHOUT_INPUT_LEN(c11, c11_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(fresh, fresh_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(fugue, fugue_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(groestl, groestl_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(groestlmyriad, groestlmyriad_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(hefty1, hefty1_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(keccak, keccak_hash, 32); // !!CHK!!
-DECLARE_CALLBACK_WITH_INPUT_LEN(lbry, lbry_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(nist5, nist5_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(quark, quark_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(qubit, qubit_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(sha1, sha1_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(sha256d, sha256d_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(shavite3, shavite3_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(skein, skein_hash, 32);
-DECLARE_CALLBACK_WITHOUT_INPUT_LEN(x5, x5_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(x11, x11_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(x13, x13_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(x14, x14_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(x15, x15_hash, 32);
-DECLARE_CALLBACK_WITHOUT_INPUT_LEN(yescrypt, yescrypt_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(bcrypt, bcrypt_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(dcrypt, dcrypt_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(s3, s3_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(jh, jh_hash, 32);
-DECLARE_CALLBACK_WITH_INPUT_LEN(c11, c11_hash, 32);
+ DECLARE_CALLBACK(bcrypt, bcrypt_hash, 32);
+ DECLARE_CALLBACK(blake, blake_hash, 32);
+ DECLARE_CALLBACK(c11, c11_hash, 32);
+ DECLARE_CALLBACK(fresh, fresh_hash, 32);
+ DECLARE_CALLBACK(fugue, fugue_hash, 32);
+ DECLARE_CALLBACK(groestl, groestl_hash, 32);
+ DECLARE_CALLBACK(groestlmyriad, groestlmyriad_hash, 32);
+ DECLARE_CALLBACK(hefty1, hefty1_hash, 32);
+ DECLARE_CALLBACK(keccak, keccak_hash, 32);
+ DECLARE_CALLBACK(lbry, lbry_hash, 32);
+ DECLARE_CALLBACK(nist5, nist5_hash, 32);
+ DECLARE_CALLBACK(quark, quark_hash, 32);
+ DECLARE_CALLBACK(qubit, qubit_hash, 32);
+ DECLARE_CALLBACK(sha1, sha1_hash, 32);
+ DECLARE_CALLBACK(sha256d, sha256d_hash, 32);
+ DECLARE_CALLBACK(shavite3, shavite3_hash, 32);
+ DECLARE_CALLBACK(skein, skein_hash, 32);
+ DECLARE_CALLBACK(x11, x11_hash, 32);
+ DECLARE_CALLBACK(x13, x13_hash, 32);
+ DECLARE_CALLBACK(x15, x15_hash, 32);
+ DECLARE_CALLBACK_WO_IL(yescrypt, yescrypt_hash, 32);
+ DECLARE_CALLBACK(dcrypt, dcrypt_hash, 32);
+ DECLARE_CALLBACK(s3, s3_hash, 32);
+ DECLARE_CALLBACK(x14, x14_hash, 32);
+ DECLARE_CALLBACK(jh, jh_hash, 32);
+ DECLARE_CALLBACK(x5, x5_hash, 32);
+ 
+ 
+ 
 
 
 DECLARE_FUNC(scrypt) {
@@ -323,7 +312,6 @@ DECLARE_FUNC(cryptonight) {
     }
     SET_BUFFER_RETURN(output, 32);
 }
-
 DECLARE_FUNC(cryptonightfast) {
     DECLARE_SCOPE;
 
@@ -361,7 +349,6 @@ DECLARE_FUNC(cryptonightfast) {
     }
     SET_BUFFER_RETURN(output, 32);
 }
-
 DECLARE_FUNC(boolberry) {
     DECLARE_SCOPE;
 
@@ -403,7 +390,7 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "boolberry", boolberry);
     NODE_SET_METHOD(exports, "c11", c11);
     NODE_SET_METHOD(exports, "cryptonight", cryptonight);
-    NODE_SET_METHOD(exports, "cryptonightfast", cryptonightfast);
+	NODE_SET_METHOD(exports, "cryptonightfast", cryptonightfast);
     NODE_SET_METHOD(exports, "fresh", fresh);
     NODE_SET_METHOD(exports, "fugue", fugue);
     NODE_SET_METHOD(exports, "groestl", groestl);
@@ -417,20 +404,20 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "scrypt", scrypt);
     NODE_SET_METHOD(exports, "scryptjane", scryptjane);
     NODE_SET_METHOD(exports, "scryptn", scryptn);
-    NODE_SET_METHOD(exports, "yescrypt", yescrypt);
     NODE_SET_METHOD(exports, "sha1", sha1);
-    NODE_SET_METHOD(exports, "s3", s3);
     NODE_SET_METHOD(exports, "sha256d", sha256d);
     NODE_SET_METHOD(exports, "shavite3", shavite3);
     NODE_SET_METHOD(exports, "skein", skein);
     NODE_SET_METHOD(exports, "x11", x11);
     NODE_SET_METHOD(exports, "x13", x13);
-    NODE_SET_METHOD(exports, "x14", x14);
     NODE_SET_METHOD(exports, "x15", x15);
     NODE_SET_METHOD(exports, "neoscrypt", neoscrypt);
-    NODE_SET_METHOD(exports, "dcrypt", dcrypt);
-    NODE_SET_METHOD(exports, "jh", jh);
-    NODE_SET_METHOD(exports, "c11", c11);
+	NODE_SET_METHOD(exports, "dcrypt", dcrypt);
+	NODE_SET_METHOD(exports, "yescrypt", yescrypt);
+	NODE_SET_METHOD(exports, "s3", s3);
+	NODE_SET_METHOD(exports, "x14", x14);
+	NODE_SET_METHOD(exports, "jh", jh);
+	NODE_SET_METHOD(exports, "x5", x5);
 }
 
 NODE_MODULE(multihashing, init)

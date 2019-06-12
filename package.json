@@ -3,8 +3,7 @@
     "version": "0.1.0",
     "main": "multihashing",
     "author": {
-        "name": "cod3gen",
-        "email": "cod3gen@gmail.com"
+        "name": "cod3gen"
     },
     "repository": {
         "type": "git",
