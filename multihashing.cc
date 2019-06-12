@@ -419,7 +419,7 @@ DECLARE_INIT(init) {
     NODE_SET_METHOD(exports, "scryptn", scryptn);
     NODE_SET_METHOD(exports, "yescrypt", yescrypt);
     NODE_SET_METHOD(exports, "sha1", sha1);
-    NODE_SET_METHOD(exports, "s3", s3");
+    NODE_SET_METHOD(exports, "s3", s3);
     NODE_SET_METHOD(exports, "sha256d", sha256d);
     NODE_SET_METHOD(exports, "shavite3", shavite3);
     NODE_SET_METHOD(exports, "skein", skein);
