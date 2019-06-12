@@ -4,7 +4,16 @@
             "target_name": "multihashing",
             "sources": [
                 "multihashing.cc",
+                "scryptn.c",
+                "yescrypt/sha256_Y.c",
+                "yescrypt/yescrypt-best.c",
+                "yescrypt/yescryptcommon.c",
+                "keccak.c",
+                "skein.c",
+                "x11.c",
+                "quark.c",
                 "bcrypt.c",
+                "groestl.c",
                 "blake.c",
                 "boolberry.cc",
                 "c11.c",
@@ -19,15 +28,25 @@
                 "nist5.c",
                 "quark.c",
                 "qubit.c",
+                "hefty1.c",
                 "scryptjane.c",
                 "scryptn.c",
                 "sha1.c",
                 "sha256d.c",
                 "shavite3.c",
-                "skein.c",
-                "x11.c",
+                "cryptonight.c",
                 "x13.c",
+                "x14.c",
+                "boolberry.cc",
+                "nist5.c",
+                "sha1.c",
                 "x15.c",
+                "fresh.c",
+                "s3.c",
+                "neoscrypt.c",
+                "dcrypt.c",
+                "jh.c",
+                "c11.c",
                 "sha3/sph_hefty1.c",
                 "sha3/sph_fugue.c",
                 "sha3/aes_helper.c",
@@ -62,9 +81,18 @@
             "include_dirs": [
                 "crypto",
             ],
-            "cflags_cc": [
-                "-std=c++0x"
+            "cflags": [
+                "-D_GNU_SOURCE -maes -fPIC -Ofast -flto -fuse-linker-plugin -funroll-loops -funswitch-loops -fpeel-loops"
             ],
+            "cflags!": [ 
+                "-O2", "-fno-strict-aliasing", "-fno-tree-vrp", "-fno-omit-frame-pointer"
+            ],
+            "ldflags": [
+                "-fPIC -Ofast -flto -fuse-linker-plugin"
+            ],
+            "cflags_cc": [
+                "-std=c++0x -maes -march=native"
+            ]
         }
     ]
 }

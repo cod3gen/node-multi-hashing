@@ -26,6 +26,18 @@
         "blake",
         "shavite",
         "fugue",
-        "sha1"
-    ]
+    "yescrypt",
+    "sha1",
+    "neoscrypt",
+    "decrypt"
+  ],
+    "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "readmeFilename": "README.md",
+  "description": "node-multi-hashing",
+  "bugs": {
+    "url": "https://github.com/UNOMP/node-multi-hashing/issues"
+  }
 }
