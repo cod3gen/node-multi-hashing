@@ -1,5 +1,5 @@
-#ifndef X11_H
-#define X11_H
+#ifndef X5_H
+#define X5_H
 
 #ifdef __cplusplus
 extern "C" {
