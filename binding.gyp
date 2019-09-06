@@ -61,13 +61,7 @@
             ],
             "include_dirs": [
                 "crypto",
-                "<!(node -e \"require('nan')\")",
-                ".",
-                "/usr/include",
-                "/usr/include/boost",
-            ],
-            "libararies": [
-                "/usr/lib/x86_64-linux-gnu"
+                "<!(node -e \"require('nan')\")"
             ],
             "cflags_cc": [
                 "-std=c++0x"
