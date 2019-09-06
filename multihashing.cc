@@ -240,7 +240,7 @@ DECLARE_FUNC(cryptonight) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue(Nan::GetCurrentContext()).FromJust();
+			fast = args[1]->BooleanValue(Nan::GetCurrentContext()).FromJust();
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
@@ -288,7 +288,7 @@ DECLARE_FUNC(cryptonightfast) {
 
     if (args.Length() >= 2) {
         if(args[1]->IsBoolean())
-            fast = args[1]->BooleanValue(Nan::GetCurrentContext()).FromJust());
+			fast = args[1]->BooleanValue(Nan::GetCurrentContext()).FromJust();
         else if(args[1]->IsUint32())
             cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
