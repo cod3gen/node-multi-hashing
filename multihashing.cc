@@ -91,7 +91,7 @@ using namespace v8;
     if (args.Length() < 1) \
         RETURN_EXCEPT("You must provide one argument."); \
  \
-    Local<Object> target = args[0]->ToObject(); \
+    Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked(); \
  \
     if(!Buffer::HasInstance(target)) \
         RETURN_EXCEPT("Argument should be a buffer object."); \
@@ -134,7 +134,7 @@ DECLARE_FUNC(scrypt) {
    if (args.Length() < 3)
        RETURN_EXCEPT("You must provide buffer to hash, N value, and R value");
 
-   Local<Object> target = args[0]->ToObject();
+   Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
 
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
@@ -158,7 +158,7 @@ DECLARE_FUNC(neoscrypt) {
    if (args.Length() < 2)
        RETURN_EXCEPT("You must provide two arguments");
 
-   Local<Object> target = args[0]->ToObject();
+   Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
 
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
@@ -182,7 +182,7 @@ DECLARE_FUNC(scryptn) {
    if (args.Length() < 2)
        RETURN_EXCEPT("You must provide buffer to hash and N factor.");
 
-   Local<Object> target = args[0]->ToObject();
+   Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
 
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
@@ -208,7 +208,7 @@ DECLARE_FUNC(scryptjane) {
     if (args.Length() < 5)
         RETURN_EXCEPT("You must provide two argument: buffer, timestamp as number, and nChainStarTime as number, nMin, and nMax");
 
-    Local<Object> target = args[0]->ToObject();
+    Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("First should be a buffer object.");
@@ -258,7 +258,7 @@ DECLARE_FUNC(cryptonight) {
             RETURN_EXCEPT("Argument 3 should be uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject();
+    Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -295,7 +295,7 @@ DECLARE_FUNC(cryptonightfast) {
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
 
-    Local<Object> target = args[0]->ToObject();
+    Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
 
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("Argument should be a buffer object.");
@@ -320,8 +320,8 @@ DECLARE_FUNC(boolberry) {
     if (args.Length() < 2)
         RETURN_EXCEPT("You must provide two arguments.");
 
-    Local<Object> target = args[0]->ToObject();
-    Local<Object> target_spad = args[1]->ToObject();
+    Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
+    Local<Object> target_spad = Nan::To<Object>(args[1]).ToLocalChecked();
     uint32_t height = 1;
 
     if(!Buffer::HasInstance(target))
