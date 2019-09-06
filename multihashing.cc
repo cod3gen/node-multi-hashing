@@ -138,8 +138,8 @@ DECLARE_FUNC(scrypt) {
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   unsigned int nValue = args[1]->Uint32Value();
-   unsigned int rValue = args[2]->Uint32Value();
+   unsigned int nValue = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+   unsigned int rValue = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -162,8 +162,8 @@ DECLARE_FUNC(neoscrypt) {
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   // unsigned int nValue = args[1]->Uint32Value();
-   // unsigned int rValue = args[2]->Uint32Value();
+   // unsigned int nValue = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+   // unsigned int rValue = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -186,7 +186,7 @@ DECLARE_FUNC(scryptn) {
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   unsigned int nFactor = args[1]->Uint32Value();
+   unsigned int nFactor = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -212,10 +212,10 @@ DECLARE_FUNC(scryptjane) {
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("First should be a buffer object.");
 
-    int timestamp = args[1]->Int32Value();
-    int nChainStartTime = args[2]->Int32Value();
-    int nMin = args[3]->Int32Value();
-    int nMax = args[4]->Int32Value();
+    int timestamp = args[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
+    int nChainStartTime = args[2]->Int32Value(Nan::GetCurrentContext()).FromJust();
+    int nMin = args[3]->Int32Value(Nan::GetCurrentContext()).FromJust();
+    int nMax = args[4]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
     char * input = Buffer::Data(target);
     char output[32];
@@ -241,7 +241,7 @@ DECLARE_FUNC(cryptonight) {
         if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue();
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value();
+            cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -252,7 +252,7 @@ DECLARE_FUNC(cryptonight) {
 
     if (args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->Uint32Value();
+            height = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 3 should be uint32_t");
     }
@@ -289,7 +289,7 @@ DECLARE_FUNC(cryptonightfast) {
         if(args[1]->IsBoolean())
             fast = args[1]->BooleanValue();
         else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value();
+            cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -331,7 +331,7 @@ DECLARE_FUNC(boolberry) {
 
     if(args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->Uint32Value();
+            height = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
