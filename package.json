@@ -1,33 +1,66 @@
 {
+  "_from": "git://github.com/cod3gen/node-multi-hashing.git",
+  "_id": "multi-hashing@0.0.9",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/multi-hashing",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "multi-hashing@git://github.com/cod3gen/node-multi-hashing.git",
     "name": "multi-hashing",
-    "version": "0.0.9",
-    "main": "multihashing",
-    "author": {
-        "name": "Matthew Little",
-        "email": "zone117x@gmail.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/zone117x/node-multi-hashing.git"
-    },
-    "dependencies" : {
-        "bindings" : "*",
-	    "nan": "^2.14.0",
-        "node-gyp": "*"
-    },
-    "keywords": [
-        "scrypt",
-        "scryptjane",
-        "script-n",
-        "x11",
-        "quark",
-        "keccak_hash",
-        "skein",
-        "bcrypt",
-        "keccak",
-        "blake",
-        "shavite",
-        "fugue",
-        "sha1"
-    ]
+    "escapedName": "multi-hashing",
+    "rawSpec": "git://github.com/cod3gen/node-multi-hashing.git",
+    "saveSpec": "git://github.com/cod3gen/node-multi-hashing.git",
+    "fetchSpec": "git://github.com/cod3gen/node-multi-hashing.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/stratum-pool"
+  ],
+  "_resolved": "git://github.com/cod3gen/node-multi-hashing.git#bfe09112a3fbfbe778d24d3d3db70d276c326ebe",
+  "_spec": "multi-hashing@git://github.com/cod3gen/node-multi-hashing.git",
+  "_where": "/root/nomp/node-open-mining-portal/node_modules/stratum-pool",
+  "author": {
+    "name": "Matthew Little",
+    "email": "zone117x@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/zone117x/node-multi-hashing/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bindings": "*",
+    "nan": "^2.14.0",
+    "node-gyp": "*"
+  },
+  "deprecated": false,
+  "description": "--------",
+  "gypfile": true,
+  "homepage": "https://github.com/zone117x/node-multi-hashing#readme",
+  "keywords": [
+    "scrypt",
+    "scryptjane",
+    "script-n",
+    "x11",
+    "quark",
+    "keccak_hash",
+    "skein",
+    "bcrypt",
+    "keccak",
+    "blake",
+    "shavite",
+    "fugue",
+    "sha1"
+  ],
+  "main": "multihashing",
+  "name": "multi-hashing",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zone117x/node-multi-hashing.git"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "version": "0.0.9"
 }

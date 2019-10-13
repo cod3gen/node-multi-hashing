@@ -128,7 +128,7 @@ using namespace v8;
  DECLARE_CALLBACK(x15, x15_hash, 32);
 
 
-DECLARE_FUNC(scrypt) {
+void scrypt(const FunctionCallbackInfo<Value>& args) {
    DECLARE_SCOPE;
 
    if (args.Length() < 3)
@@ -152,7 +152,7 @@ DECLARE_FUNC(scrypt) {
    SET_BUFFER_RETURN(output, 32);
 }
 
-DECLARE_FUNC(neoscrypt) {
+void neoscrypt(const FunctionCallbackInfo<Value>& args) {
    DECLARE_SCOPE;
 
    if (args.Length() < 2)
@@ -163,8 +163,8 @@ DECLARE_FUNC(neoscrypt) {
    if(!Buffer::HasInstance(target))
        RETURN_EXCEPT("Argument should be a buffer object.");
 
-   // unsigned int nValue = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
-   // unsigned int rValue = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+   // unsigned int nValue = args[1]->Uint32Value();
+   // unsigned int rValue = args[2]->Uint32Value();
 
    char * input = Buffer::Data(target);
    char output[32];
@@ -176,7 +176,7 @@ DECLARE_FUNC(neoscrypt) {
    SET_BUFFER_RETURN(output, 32);
 }
 
-DECLARE_FUNC(scryptn) {
+void scryptn(const FunctionCallbackInfo<Value>& args) {
    DECLARE_SCOPE;
 
    if (args.Length() < 2)
@@ -202,7 +202,7 @@ DECLARE_FUNC(scryptn) {
    SET_BUFFER_RETURN(output, 32);
 }
 
-DECLARE_FUNC(scryptjane) {
+void scryptjane(const FunctionCallbackInfo<Value>& args) {
     DECLARE_SCOPE;
 
     if (args.Length() < 5)
@@ -213,10 +213,10 @@ DECLARE_FUNC(scryptjane) {
     if(!Buffer::HasInstance(target))
         RETURN_EXCEPT("First should be a buffer object.");
 
-    int timestamp = args[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
-    int nChainStartTime = args[2]->Int32Value(Nan::GetCurrentContext()).FromJust();
-    int nMin = args[3]->Int32Value(Nan::GetCurrentContext()).FromJust();
-    int nMax = args[4]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	int timestamp = args[1]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	int nChainStartTime = args[2]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	int nMin = args[3]->Int32Value(Nan::GetCurrentContext()).FromJust();
+	int nMax = args[4]->Int32Value(Nan::GetCurrentContext()).FromJust();
 
     char * input = Buffer::Data(target);
     char output[32];
@@ -228,7 +228,7 @@ DECLARE_FUNC(scryptjane) {
     SET_BUFFER_RETURN(output, 32);
 }
 
-DECLARE_FUNC(cryptonight) {
+void cryptonight(const FunctionCallbackInfo<Value>& args) {
     DECLARE_SCOPE;
 
     bool fast = false;
@@ -239,10 +239,10 @@ DECLARE_FUNC(cryptonight) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean())
+		if (args[1]->IsBoolean())
 			fast = args[1]->BooleanValue(Nan::GetCurrentContext()).FromJust();
-        else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+		else if (args[1]->IsUint32())
+			cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -253,7 +253,7 @@ DECLARE_FUNC(cryptonight) {
 
     if (args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+			height = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 3 should be uint32_t");
     }
@@ -277,7 +277,7 @@ DECLARE_FUNC(cryptonight) {
     }
     SET_BUFFER_RETURN(output, 32);
 }
-DECLARE_FUNC(cryptonightfast) {
+void cryptonightfast(const FunctionCallbackInfo<Value>& args) {
     DECLARE_SCOPE;
 
     bool fast = false;
@@ -287,10 +287,10 @@ DECLARE_FUNC(cryptonightfast) {
         RETURN_EXCEPT("You must provide one argument.");
 
     if (args.Length() >= 2) {
-        if(args[1]->IsBoolean())
+		if (args[1]->IsBoolean())
 			fast = args[1]->BooleanValue(Nan::GetCurrentContext()).FromJust();
-        else if(args[1]->IsUint32())
-            cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+		else if (args[1]->IsUint32())
+			cn_variant = args[1]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 2 should be a boolean or uint32_t");
     }
@@ -314,14 +314,14 @@ DECLARE_FUNC(cryptonightfast) {
     }
     SET_BUFFER_RETURN(output, 32);
 }
-DECLARE_FUNC(boolberry) {
+void boolberry(const FunctionCallbackInfo<Value>& args) {
     DECLARE_SCOPE;
 
     if (args.Length() < 2)
         RETURN_EXCEPT("You must provide two arguments.");
 
-    Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
-    Local<Object> target_spad = Nan::To<Object>(args[1]).ToLocalChecked();
+	Local<Object> target = Nan::To<Object>(args[0]).ToLocalChecked();
+	Local<Object> target_spad = Nan::To<Object>(args[1]).ToLocalChecked();
     uint32_t height = 1;
 
     if(!Buffer::HasInstance(target))
@@ -332,7 +332,7 @@ DECLARE_FUNC(boolberry) {
 
     if(args.Length() >= 3) {
         if(args[2]->IsUint32())
-            height = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
+			height = args[2]->Uint32Value(Nan::GetCurrentContext()).FromJust();
         else
             RETURN_EXCEPT("Argument 3 should be an unsigned integer.");
     }
@@ -349,34 +349,63 @@ DECLARE_FUNC(boolberry) {
     SET_BUFFER_RETURN(output, 32);
 }
 
-DECLARE_INIT(init) {
-    NODE_SET_METHOD(exports, "bcrypt", bcrypt);
-    NODE_SET_METHOD(exports, "blake", blake);
-    NODE_SET_METHOD(exports, "boolberry", boolberry);
-    NODE_SET_METHOD(exports, "c11", c11);
-    NODE_SET_METHOD(exports, "cryptonight", cryptonight);
-	NODE_SET_METHOD(exports, "cryptonightfast", cryptonightfast);
-    NODE_SET_METHOD(exports, "fresh", fresh);
-    NODE_SET_METHOD(exports, "fugue", fugue);
-    NODE_SET_METHOD(exports, "groestl", groestl);
-    NODE_SET_METHOD(exports, "groestlmyriad", groestlmyriad);
-    NODE_SET_METHOD(exports, "hefty1", hefty1);
-    NODE_SET_METHOD(exports, "keccak", keccak);
-    NODE_SET_METHOD(exports, "lbry", lbry);
-    NODE_SET_METHOD(exports, "nist5", nist5);
-    NODE_SET_METHOD(exports, "quark", quark);
-    NODE_SET_METHOD(exports, "qubit", qubit);
-    NODE_SET_METHOD(exports, "scrypt", scrypt);
-    NODE_SET_METHOD(exports, "scryptjane", scryptjane);
-    NODE_SET_METHOD(exports, "scryptn", scryptn);
-    NODE_SET_METHOD(exports, "sha1", sha1);
-    NODE_SET_METHOD(exports, "sha256d", sha256d);
-    NODE_SET_METHOD(exports, "shavite3", shavite3);
-    NODE_SET_METHOD(exports, "skein", skein);
-    NODE_SET_METHOD(exports, "x11", x11);
-    NODE_SET_METHOD(exports, "x13", x13);
-    NODE_SET_METHOD(exports, "x15", x15);
-    NODE_SET_METHOD(exports, "neoscrypt", neoscrypt);
+void Init(Local<Object> exports, Local<Context> context) {
+	Isolate* isolate = context->GetIsolate();
+	exports->Set(context, String::NewFromUtf8(isolate, "bcrypt", NewStringType::kNormal) .ToLocalChecked(),
+		FunctionTemplate::New(isolate, bcrypt)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "blake", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, blake)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "boolberry", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, boolberry)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "c11", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, c11)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "cryptonight", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, cryptonight)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "cryptonightfast", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, cryptonightfast)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "fresh", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, fresh)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "fugue", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, fugue)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "groestl", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, groestl)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "groestlmyriad", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, groestlmyriad)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "hefty1", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, hefty1)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "keccak", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, keccak)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "lbry", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, lbry)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "nist5", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, nist5)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "quark", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, quark)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "qubit", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, qubit)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "scrypt", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, scrypt)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "scryptjane", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, scryptjane)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "scryptn", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, scryptn)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "neoscrypt", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, neoscrypt)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "sha1", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, sha1)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "sha256d", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, sha256d)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "skein", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, skein)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "x11", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, x11)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "x13", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, x13)->GetFunction(context).ToLocalChecked()).FromJust();
+	exports->Set(context, String::NewFromUtf8(isolate, "x15", NewStringType::kNormal).ToLocalChecked(),
+		FunctionTemplate::New(isolate, x15)->GetFunction(context).ToLocalChecked()).FromJust();
 }
 
-NODE_MODULE(multihashing, init)
+//NODE_MODULE(multihashing, init)
+NODE_MODULE_INIT(/* exports, module, context */) {
+	Init(exports, context);
+}
